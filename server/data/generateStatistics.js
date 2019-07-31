@@ -110,7 +110,7 @@ const applyFilter = (statistics, filter) => {
 
     return {
         count: rows.length,
-        rows: (limit !== null && offset !== null) ? rows.slice(offset * limit, offset * limit + limit) : rows,
+        data: (limit !== null && offset !== null) ? rows.slice(offset * limit, offset * limit + limit) : rows,
         total: rows.reduce((acc, row) => ({
             impressions: acc.impressions + row.impressions,
             clicks: acc.clicks + row.clicks,

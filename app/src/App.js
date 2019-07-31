@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import DateFilter from "./components/DateFilter/DateFilter";
+import AgentFilter from "./components/AgentFilter/AgentFilter";
+import Row from "./components/Row/Row";
+import Pagination from "./components/Pagination/Pagination";
+import DataContainer from "./components/Data/DataContainer";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = props => {
+    return (
+        <div className="app-wrapper">
+            <div className="app">
+                <div className="filterField"><DateFilter/></div>
+                <div className="filterField"><AgentFilter/></div>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <td>Day</td>
+                        <td>Impression</td>
+                        <td>Conversions</td>
+                        <td>Money</td>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        <DataContainer/>
+                    </tbody>
+                </table>
+
+                <Pagination/>
+            </div>
+        </div>
+    )
+};
 
 export default App;

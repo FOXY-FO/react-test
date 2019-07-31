@@ -5,7 +5,7 @@ module.exports = [
         platform: 1
     },
     {
-        label: "Mac OS",
+        label: "Mac BrowserContainer",
         value: 2,
         platform: 1
     },
