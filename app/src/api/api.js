@@ -16,5 +16,8 @@ export const API = {
     },
     getGroups() {
         return instance.get('groups');
+    },
+    getData(from, to, groupBy, platform = 1, browsers = [1], operatingSystems = [1], limit = 5, offset = 0) {
+        return instance.get(`statistics?groupBy=${groupBy}&from=${from}&to=${to}&limit=${limit}&browsers=${browsers}&platform=${platform}&operatingSystems=${operatingSystems}&offset=${offset}`);
     }
 };

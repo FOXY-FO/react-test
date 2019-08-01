@@ -2,11 +2,10 @@ import React from 'react';
 import './App.css';
 import DateFilter from "./components/DateFilter/DateFilter";
 import AgentFilter from "./components/AgentFilter/AgentFilter";
-import Row from "./components/Row/Row";
-import Pagination from "./components/Pagination/Pagination";
 import DataContainer from "./components/Data/DataContainer";
+import PaginationContainer from "./components/Pagination/PaginationContainer";
 
-const App = props => {
+const App = () => {
     return (
         <div className="app-wrapper">
             <div className="app">
@@ -28,7 +27,7 @@ const App = props => {
                     </tbody>
                 </table>
 
-                <Pagination/>
+                <PaginationContainer/>
             </div>
         </div>
     )

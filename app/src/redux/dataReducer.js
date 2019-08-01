@@ -1,61 +1,57 @@
+import {API} from "../api/api";
+
+const SET_DATA = "SET_DATA";
+const SET_COUNT = "SET_COUNT";
+const SET_TOTAL = "SET_TOTAL";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const SET_OFFSET = "SET_OFFSET";
+
 let initialState = {
-    count: 7,
-    data: [
-        {
-            day: "2019-07-01",
-            impressions: 18,
-            clicks: 4,
-            money: 0.20903
-        },
-        {
-            day: "2019-07-02",
-            impressions: 16,
-            clicks: 4,
-            money: 0.19261999999999999
-        },
-        {
-            day: "2019-07-03",
-            impressions: 14,
-            clicks: 3,
-            money: 0.15514
-        },
-        {
-            day: "2019-07-04",
-            impressions: 19,
-            clicks: 5,
-            money: 0.2572
-        },
-        {
-            day: "2019-07-05",
-            impressions: 21,
-            clicks: 7,
-            money: 0.35465
-        },
-        {
-            day: "2019-07-06",
-            impressions: 21,
-            clicks: 11,
-            money: 0.6426700000000001
-        },
-        {
-            day: "2019-07-07",
-            impressions: 22,
-            clicks: 3,
-            money: 0.21050999999999997
-        }
-    ],
+    currentPage: 1,
+    pageSize: 5,
+    offset: 0,
+    count: 0,
+    data: [],
     total: {
-        impressions: 131,
-        clicks: 37,
-        money: 2.02182
+        impressions: null,
+        clicks: null,
+        money: null
     }
 };
 
 const dataReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_DATA:
+            return {...state, data: [...action.data]};
+        case SET_COUNT:
+            return {...state, count: action.value};
+        case SET_TOTAL:
+            return {...state, total: {...action.total}};
+        case SET_CURRENT_PAGE:
+            return {...state, currentPage: action.page};
+        case SET_OFFSET:
+            return {...state, offset: action.offset};
         default:
             return state;
     }
+};
+
+const setCount = value => ({type: SET_COUNT, value});
+const setData = data => ({type: SET_DATA, data});
+const setTotal = total => ({type: SET_TOTAL, total});
+export const setCurrentPage = page => ({type: SET_CURRENT_PAGE, page});
+export const setOffset = offset => ({type: SET_OFFSET, offset});
+
+export const getData = (from, to, groupBy, platform = 1, browsers = [1], operatingSystems = [1], limit = 5, offset = 0) => dispatch => {
+    API.getData(from, to, groupBy, platform, browsers, operatingSystems, limit, offset)
+        .then(response => {
+
+            if (response.status === 200) {
+                dispatch(setCount(response.data.count));
+                dispatch(setData(response.data.data));
+                dispatch(setTotal(response.data.total));
+            }
+        });
 };
 
 export default dataReducer;
